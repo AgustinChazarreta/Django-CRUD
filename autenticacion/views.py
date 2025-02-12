@@ -10,7 +10,7 @@ def home(request):
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html',{
-        'form' : UserCreationForm
+        'form': UserCreationForm
         })
     else:
         if request.POST['password1'] == request.POST['password2']:
@@ -21,5 +21,11 @@ def signup(request):
                 user.save()
                 return HttpResponse('User created successfully')
             except: 
-                return HttpResponse('User alredy exist')
-        return HttpResponse('Passwords do not match')
+                return render(request, 'signup.html',{
+                'form': UserCreationForm,
+                'error': 'User already exists'
+                })
+        return render(request, 'signup.html',{
+        'form' : UserCreationForm,
+        'error': 'Passwords do not match'
+        })
