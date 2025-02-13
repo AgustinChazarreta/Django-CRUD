@@ -14,9 +14,19 @@
         <li>
             <a href="/tasks">Tasks</a>
         </li>
+        
+        {% if user.is_authenticated %}
+        <li>
+            <a href="/logout">Log out</a>
+        </li>
+        {% else %}
         <li>
             <a href="/signup">Sign up</a>
         </li>
+        <li>
+            <a href="/signin">Sign in</a>
+        </li>
+        {% endif %}
     </ul>
 </nav>
     {% block content %}
