@@ -51,6 +51,3 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('home')
-
-def tasks(request):
-    return render(request, 'tasks.html')

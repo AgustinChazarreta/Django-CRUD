@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from autenticacion import views
+from autenticacion import views as auth_views  # ✅ Alias para autenticacion
+from crud import views as crud_views  # ✅ Alias para crud
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
-    path('tasks/', views.tasks, name='tasks'),
-    path('logout/', views.signout, name='logout'),
-    path('signin/', views.signin, name='signin'),
+    path('', auth_views.home, name='home'),  # Usa el alias correcto
+    path('signup/', auth_views.signup, name='signup'),
+    path('tasks/', crud_views.tasks, name='tasks'),  # Aquí sí es de "crud"
+    path('logout/', auth_views.signout, name='logout'),
+    path('signin/', auth_views.signin, name='signin'),
 ]
