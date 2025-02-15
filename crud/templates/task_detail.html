@@ -2,5 +2,7 @@
 
 {% block content %}
 <h1>Tasks detail</h1>
-{{task.title}}
+<h1>{{task.title}}</h1>
+<h2>User: {{task.user.username}}</h2>
+<p>Description: {{task.description}}</p>
 {% endblock %}
