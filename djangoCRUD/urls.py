@@ -27,5 +27,5 @@ urlpatterns = [
     path('signin/', auth_views.signin, name='signin'),
     path('tasks/', crud_views.tasks, name='tasks'),  # Aquí sí es de "crud"
     path('tasks/create/', crud_views.create_task, name='create_task'),
-    
+    path('tasks/<int:task_id>/', crud_views.task_detail, name='task_detail'),
 ]
