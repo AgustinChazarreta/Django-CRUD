@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tasks</h1>
+{% if request.path == '/tasks/' %}
+    <h1>Tasks pending</h1>
+{% else %}
+    <h1>Completed Tasks</h1>
+{% endif %}
+
+<ul>
+    {% for task in tasks %}
+    <li>
+        <a href="{% url 'task_detail' task.id %}">
+            <h1>{{task.title}}</h1>
+        </a>
+        {% if request.path != '/tasks/' %}
+            <p>Fecha: {{task.datecompleted|date:'j M Y | H:i A'}}</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

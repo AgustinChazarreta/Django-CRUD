@@ -23,7 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_views.home, name='home'),  # Usa el alias correcto
     path('signup/', auth_views.signup, name='signup'),
-    path('tasks/', crud_views.tasks, name='tasks'),  # Aquí sí es de "crud"
     path('logout/', auth_views.signout, name='logout'),
     path('signin/', auth_views.signin, name='signin'),
+    path('tasks/', crud_views.tasks, name='tasks'),  # Aquí sí es de "crud"
+    path('tasks_completed/', crud_views.tasks_completed, name='tasks_completed'),
+    path('tasks/create/', crud_views.create_task, name='create_task'),
+    path('tasks/<int:task_id>/', crud_views.task_detail, name='task_detail'),
+    path('tasks/<int:task_id>/update', crud_views.update_task, name='update_task'),
+    path('tasks/<int:task_id>/complete', crud_views.complete_task, name='complete_task'),
+    path('tasks/<int:task_id>/delete', crud_views.delete_task, name='delete_task'),
 ]

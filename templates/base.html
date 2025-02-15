@@ -11,20 +11,25 @@
         <li>
             <a href="/">Home</a>
         </li>
-        <li>
-            <a href="/tasks">Tasks</a>
-        </li>
-        
         {% if user.is_authenticated %}
         <li>
-            <a href="/logout">Log out</a>
+            <a href="{% url 'tasks'%}">Tasks Pending</a>
+        </li>
+        <li>
+            <a href="{% url 'tasks_completed'%}">Tasks Completed</a>
+        </li>
+        <li>
+            <a href="{% url 'create_task'%}">Create task</a>
+        </li>
+        <li>
+            <a href="{% url 'logout'%}">Log out</a>
         </li>
         {% else %}
         <li>
-            <a href="/signup">Sign up</a>
+            <a href="{% url 'signup'%}">Sign up</a>
         </li>
         <li>
-            <a href="/signin">Sign in</a>
+            <a href="{% url 'signin'%}">Sign in</a>
         </li>
         {% endif %}
     </ul>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tasks detail</h1>
+<h1>{{task.title}}</h1>
+<h2>User: {{task.user.username}}</h2>
+<p>Description: {{task.description}}</p>
+<p>Task ID: {{ task.id }}</p>
+<p>Task Important Status: {{ task.important }}</p>
+
+
+<form action="{% url 'update_task' task.id %}" method="GET">
+    {% csrf_token %}
+    <button>
+        Update
+    </button>
+</form>
+<form action="{% url 'complete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+        Complete
+    </button>
+</form>
+<form action="{% url 'delete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+        Delete
+    </button>
+</form>
+
+{% endblock %}
