@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import TaskForm
+from .models import Task
 
 # Create your views here.
 def tasks(request):
-    return render(request, 'tasks.html')
+    tasks = Task.objects.filter(user = request.user)
+    return render(request, 'tasks.html',{
+        'tasks': tasks
+    })
 
 def create_task(request):
     if request.method == 'GET':
