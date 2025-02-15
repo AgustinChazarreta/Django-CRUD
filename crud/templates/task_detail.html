@@ -5,4 +5,9 @@
 <h1>{{task.title}}</h1>
 <h2>User: {{task.user.username}}</h2>
 <p>Description: {{task.description}}</p>
+<a href="{% url 'update_task' task.id %}">
+    <button>
+        Update
+    </button>
+</a>
 {% endblock %}
