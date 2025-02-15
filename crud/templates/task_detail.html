@@ -6,6 +6,8 @@
 <h2>User: {{task.user.username}}</h2>
 <p>Description: {{task.description}}</p>
 <p>Task ID: {{ task.id }}</p>
+<p>Task Important Status: {{ task.important }}</p>
+
 
 <form action="{% url 'update_task' task.id %}" method="GET">
     {% csrf_token %}
