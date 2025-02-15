@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', auth_views.signout, name='logout'),
     path('signin/', auth_views.signin, name='signin'),
     path('tasks/', crud_views.tasks, name='tasks'),  # Aquí sí es de "crud"
+    path('tasks_completed/', crud_views.tasks_completed, name='tasks_completed'),
     path('tasks/create/', crud_views.create_task, name='create_task'),
     path('tasks/<int:task_id>/', crud_views.task_detail, name='task_detail'),
     path('tasks/<int:task_id>/update', crud_views.update_task, name='update_task'),
