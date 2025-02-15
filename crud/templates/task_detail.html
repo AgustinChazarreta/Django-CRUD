@@ -5,9 +5,25 @@
 <h1>{{task.title}}</h1>
 <h2>User: {{task.user.username}}</h2>
 <p>Description: {{task.description}}</p>
-<a href="{% url 'update_task' task.id %}">
+<p>Task ID: {{ task.id }}</p>
+
+<form action="{% url 'update_task' task.id %}" method="GET">
+    {% csrf_token %}
     <button>
         Update
     </button>
-</a>
+</form>
+<form action="{% url 'complete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+        Complete
+    </button>
+</form>
+<form action="{% url 'delete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+        Delete
+    </button>
+</form>
+
 {% endblock %}

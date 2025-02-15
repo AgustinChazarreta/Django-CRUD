@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TaskForm
 from .models import Task
-
+from django.utils import timezone
 
 # Create your views here.
 def tasks(request):
-    tasks = Task.objects.filter(user = request.user)
+    tasks = Task.objects.filter(user = request.user, datecompleted__isnull = True)
     return render(request, 'tasks.html',{
         'tasks': tasks
     })
@@ -32,16 +32,28 @@ def update_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
     if request.method == 'GET':
         form = TaskForm(instance=task)
-        return render(request, 'update_task.html',{
+        return render(request, 'update_task.html', {
             'task': task,
             'form': form
         })
     else:
+        form = TaskForm(request.POST, instance=task)
         try:
-            form = TaskForm(request.POST, instance=task)
             form.save()
             return redirect('task_detail', task_id=task.id)
         except ValueError:
-            return render(request, 'update_task.html',{
-                'error': "Error updating task"
+            return render(request, 'update_task.html', {
+                'task': task,
+                'form': form,
+                'error': "ERROR: Incorrect value"
             })
+
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.datecompleted = timezone.now()
+        task.save()
+        return redirect('tasks')
+
+def delete_task(request, task_id):
+    return redirect('tasks')
