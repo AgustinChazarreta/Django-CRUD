@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tasks detail</h1>
-<h1>{{task.title}}</h1>
-<h2>User: {{task.user.username}}</h2>
-<p>Description: {{task.description}}</p>
-<p>Task ID: {{ task.id }}</p>
-<p>Task Important Status: {{ task.important }}</p>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Task Detail</h1>
 
+        <div class="mb-4">
+            <h2 class="mb-5"><u>{{ task.title }}</u></h2>  <!-- Agregado margen inferior -->
+            <h3>User: {{ task.user.username }}</h3>
+            <p><strong>Description:</strong> {{ task.description }}</p>
+            <p><strong>Task ID:</strong> {{ task.id }}</p>
+            <p><strong>Task Important Status:</strong> {{ task.important }}</p>
+        </div>
 
-<form action="{% url 'update_task' task.id %}" method="GET">
-    {% csrf_token %}
-    <button>
-        Update
-    </button>
-</form>
-<form action="{% url 'complete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        Complete
-    </button>
-</form>
-<form action="{% url 'delete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        Delete
-    </button>
-</form>
+        <!-- Botones alineados a la izquierda -->
+        <div class="d-flex justify-content-start gap-3">
+            <form action="{% url 'update_task' task.id %}" method="GET" class="d-inline-block">
+                <button type="submit" class="btn btn-warning">Update</button>
+            </form>
 
+            <form action="{% url 'complete_task' task.id %}" method="POST" class="d-inline-block">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Complete</button>
+            </form>
+
+            <form action="{% url 'delete_task' task.id %}" method="POST" class="d-inline-block">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
