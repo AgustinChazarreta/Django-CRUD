@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Sign up</h1>
+<div class="container d-flex justify-content-center">
+    <div class="col-12 col-md-8 col-lg-5 p-4 border rounded shadow-sm bg-white mt-5">
+        <form method="POST">
+            <h1 class="mb-4 text-center">Sign Up</h1>
+            {% csrf_token %}
 
-{{error}}
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+            
+            <div class="mb-2 row d-flex align-items-center"> <!-- Añadimos d-flex para alinear en la misma fila -->
+                <label for="{{ form.username.id_for_label }}" class="col-12 col-sm-4 col-form-label mb-0">{{ form.username.label }}:</label>
+                <div class="col-12 col-sm-8">
+                    {{ form.username }}
+                </div>
+            </div>
+            
+            <div class="mb-2 row d-flex align-items-center"> <!-- Añadimos d-flex para alinear en la misma fila -->
+                <label for="{{ form.password1.id_for_label }}" class="col-12 col-sm-4 col-form-label mb-0">{{ form.password1.label }}:</label>
+                <div class="col-12 col-sm-8">
+                    {{ form.password1 }}
+                </div>
+            </div>
+            
+            <div class="mb-2 row d-flex align-items-center"> <!-- Añadimos d-flex para alinear en la misma fila -->
+                <label for="{{ form.password2.id_for_label }}" class="col-12 col-sm-4 col-form-label mb-0">{{ form.password2.label }}:</label>
+                <div class="col-12 col-sm-8">
+                    {{ form.password2 }}
+                </div>
+            </div>
 
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>
-        Sign up
-    </button>
-</form>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+    </div>
+</div>
+
 {% endblock %}

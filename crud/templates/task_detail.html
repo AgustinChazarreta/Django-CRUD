@@ -1,31 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tasks detail</h1>
-<h1>{{task.title}}</h1>
-<h2>User: {{task.user.username}}</h2>
-<p>Description: {{task.description}}</p>
-<p>Task ID: {{ task.id }}</p>
-<p>Task Important Status: {{ task.important }}</p>
+    <div class="container mt-5" style="max-width: 600px;">
+        <h1 class="mb-4 text-center text-dark">Task Detail</h1>
 
+        <div class="card mb-4 border-primary">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">{{ task.title }}</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">User:  <span class="text-muted">{{ task.user.username }}</span></h5>
+                <p class="card-text"><strong>Description:</strong> {{ task.description }}</p>
+                <p class="card-text"><strong>Task ID:</strong> {{ task.id }}</p>
+                <p class="card-text"><strong>Important Status:</strong> {{ task.important }}</p>
+            </div>
+        </div>
 
-<form action="{% url 'update_task' task.id %}" method="GET">
-    {% csrf_token %}
-    <button>
-        Update
-    </button>
-</form>
-<form action="{% url 'complete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        Complete
-    </button>
-</form>
-<form action="{% url 'delete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        Delete
-    </button>
-</form>
+        <div class="d-flex justify-content-center gap-3">
+            <form action="{% url 'update_task' task.id %}" method="GET">
+                <button type="submit" class="btn btn-outline-warning">Update</button>
+            </form>
 
+            <form action="{% url 'complete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success">Complete</button>
+            </form>
+
+            <form action="{% url 'delete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
