@@ -5,14 +5,13 @@
     <div class="col-12 col-md-8 col-lg-5 p-4 border rounded shadow-sm bg-white mt-5">
         <form method="POST">
             <h1 class="mb-4 text-center">Sign Up</h1>
+            {% csrf_token %}
 
             {% if error %}
                 <div class="alert alert-danger">
                     {{ error }}
                 </div>
             {% endif %}
-            
-            {% csrf_token %}
             
             <div class="mb-2 row d-flex align-items-center"> <!-- Añadimos d-flex para alinear en la misma fila -->
                 <label for="{{ form.username.id_for_label }}" class="col-12 col-sm-4 col-form-label mb-0">{{ form.username.label }}:</label>

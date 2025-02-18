@@ -3,17 +3,16 @@
 {% block content %}
 <div class="container d-flex justify-content-center">
     <div class="col-12 col-md-8 col-lg-5 p-4 border rounded shadow-sm bg-white mt-5">
-        <h1 class="mb-4 text-center">Sign In</h1>
-        
-        {% if error %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-        {% endif %}
-        
         <form method="POST">
+            <h1 class="mb-4 text-center">Sign In</h1>
             {% csrf_token %}
             
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+
             <div class="mb-2 row d-flex align-items-center">
                 <label for="{{ form.username.id_for_label }}" class="col-12 col-sm-4 col-form-label mb-0">{{ form.username.label }}:</label>
                 <div class="col-12 col-sm-8">
